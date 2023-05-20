@@ -25,22 +25,19 @@ public class StandAloneTests {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(15,TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://rahulshettyacademy.com/client");
-        driver.findElement(By.id("userEmail")).sendKeys("testingsubhajit220@gmail.com");
-        driver.findElement(By.id("userPassword")).sendKeys("Aug@1234");
+
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.userName.sendKeys("testingsubhajit220@gmail.com");
+        loginPage.password.sendKeys("Aug@1234");
 
           // Move to Home Page from Login Page
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement element=driver.findElement(By.id("login"));
-        element.click();
 
-
-
-
+        loginPage.loginBtn.click();
 
         String itemname = "zara coat 3";
-
 
         List<String> itemnames = new ArrayList<>();
         itemnames.add("adidas original");
@@ -64,8 +61,11 @@ public class StandAloneTests {
 
 
         }
-// Move to Cart Page from Home Page
-        driver.findElement(By.xpath("(//button[@class='btn btn-custom'])[3]")).click();
+        HomePage homePage = new HomePage(driver);
+      // Move to Cart Page from Home Page
+        homePage.cartBtn.click();
+
+
 
         Thread.sleep(5000);
 
@@ -80,16 +80,19 @@ public class StandAloneTests {
 
         // Move to Checkout Page from Cart Page
 
+        CartPage cartPage = new CartPage(driver);
 
 
         WebDriverWait wait = new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOfElementLocated((
-                By.xpath("(//button[@class='btn btn-primary'])[5]"))));
 
-        WebElement checkoutButton= driver.findElement(By.xpath("(//button[@class='btn btn-primary'])[5]"));
 
-        js.executeScript("arguments[0].scrollIntoView();", checkoutButton);
-        js.executeScript("arguments[0].click();", checkoutButton);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();",  cartPage.checkoutBtn );
+        js.executeScript("arguments[0].click();", cartPage.checkoutBtn);
+
+
+
 
 
         Actions actions = new Actions(driver);
@@ -107,13 +110,18 @@ public class StandAloneTests {
 
         // click on Place Order
 
+        CheckOutPage checkOutPage = new CheckOutPage(driver);
+
+
         actions.click(
-    driver.findElement (By.xpath("//a[text()='Place Order ']"))).build().perform();
+                checkOutPage.orderBtn).build().perform();
 
 
         // validate Success Message
 
-        String actualMessage= driver.findElement(By.xpath("//h1[@class]")).getText();
+        SuccessPage successPage = new SuccessPage(driver);
+
+        String actualMessage= successPage.successMessage.getText();
         String expectedMessage="THANKYOU FOR THE ORDER.";
 
         Assert.assertTrue(expectedMessage.equalsIgnoreCase(actualMessage),
