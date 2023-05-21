@@ -29,6 +29,9 @@ public class LoginPage extends AbstractComponent {
     @FindBy(id="login")
     public WebElement loginBtn;
 
+    @FindBy(xpath = "//div[@role='alert']")
+    WebElement loginErrorAlert;
+
 
 
     public HomePage loginToApp(String user, String pass){
@@ -37,5 +40,11 @@ public class LoginPage extends AbstractComponent {
         loginBtn.click();
 
         return new HomePage(driverReference);
+    }
+
+    public String errorMessage()
+    {
+        waitForWebElementToAppear(loginErrorAlert);
+        return loginErrorAlert.getText();
     }
 }

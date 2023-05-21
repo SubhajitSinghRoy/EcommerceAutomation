@@ -3,6 +3,8 @@ package com.TestComponents;
 import com.pageObjects.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    WebDriver driver;
+   public  WebDriver driver;
+    public LoginPage loginPage;
 
     public WebDriver initializeDriver() throws IOException {
 
@@ -32,10 +35,24 @@ public class BaseTest {
         else return driver;
     }
 
+
+
     public LoginPage launchApp(WebDriver driver){
         driver.get("https://rahulshettyacademy.com/client");
 
         return new LoginPage(driver);
+    }
+
+    @BeforeTest
+    public void goToLoginPage() throws IOException {
+
+        driver=initializeDriver();
+        loginPage = launchApp(driver);
+    }
+
+    @AfterTest
+    public void quitApplication(){
+        this.driver.quit();
     }
 
 }

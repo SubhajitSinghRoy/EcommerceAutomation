@@ -13,16 +13,22 @@ public class CartPage extends AbstractComponent {
 
     WebDriver driver;
 
-   @FindBy(xpath="//*[text()='Checkout']")
-   WebElement checkoutBtn;
+    @FindBy(xpath = "//*[text()='Checkout']")
+    WebElement checkoutBtn;
 
-    public CartPage(WebDriver driver){
+    @FindBy(xpath = "//button[@class='btn btn-danger']")
+    List<WebElement> removeProductIcon;
+
+    @FindBy(xpath = "//div[@class='ng-star-inserted']//h1")
+    WebElement noProductMsg;
+
+    public CartPage(WebDriver driver) {
         super(driver);
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    public void verifyItemPresentInCart(List<String> itemnames){
+    public void verifyItemPresentInCart(List<String> itemnames) {
         for (int j = 0; j < itemnames.size(); j++) {
             if (!driver.findElement(By.xpath("//*[text()='" +
                     itemnames.get(j) +
@@ -39,6 +45,22 @@ public class CartPage extends AbstractComponent {
         javaScriptExecutorClick(this.checkoutBtn);
         return new CheckOutPage(driver);
 
+    }
+
+    public void removeAllProductsFromCart() throws InterruptedException {
+
+
+        int j = removeProductIcon.size();
+        while (j > 0) {
+            hardWait(4000);
+            removeProductIcon.get(0).click();
+            j--;
+        }
 
     }
+
+    public String NoProductMsg() {
+        return noProductMsg.getText();
+    }
 }
+

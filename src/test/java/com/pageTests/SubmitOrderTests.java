@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SubmitOrderTests extends BaseTest {
 
-    public WebDriver driver;
+    //public WebDriver driver;
 
     public SubmitOrderTests() throws IOException {
     }
@@ -22,11 +22,6 @@ public class SubmitOrderTests extends BaseTest {
 
     @Test
     public void orderTest() throws InterruptedException, IOException {
-        driver=initializeDriver();
-
-
-        LoginPage loginPage = launchApp(driver);
-
 
         List<String> itemnames = new ArrayList<>();
         itemnames.add("adidas original");
@@ -36,20 +31,16 @@ public class SubmitOrderTests extends BaseTest {
         HomePage homePage = loginPage.loginToApp("testingsubhajit220@gmail.com", "Aug@1234");
         homePage.selectItemfromCart(itemnames);
 
-
         CartPage cartPage = homePage.clickCartButton();
         cartPage.verifyItemPresentInCart(itemnames);
 
-
         CheckOutPage checkOutPage = cartPage.clickCheckoutButton();
         checkOutPage.fillCountryName("India");
-
 
         SuccessPage successPage = checkOutPage.orderItems();
         Assert.assertTrue(successPage.returnSuccessMessage().equalsIgnoreCase("THANKYOU FOR THE ORDER."),
                 "The expected and the actual message do not match");
 
-        driver.quit();
 
     }
 }

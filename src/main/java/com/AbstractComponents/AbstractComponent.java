@@ -49,6 +49,12 @@ public class AbstractComponent {
            wait.until(ExpectedConditions.invisibilityOfElementLocated(byLocator));
     }
 
+    public void waitForWebElementToAppear(WebElement webElement){
+
+        WebDriverWait wait = new WebDriverWait(webDriverReference,5000);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
     public void javaScriptExecutorClick(WebElement element){
 
         JavascriptExecutor js =(JavascriptExecutor) webDriverReference;
