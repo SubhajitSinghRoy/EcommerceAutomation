@@ -1,17 +1,19 @@
 package com.pageObjects;
 
+import com.AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+public class LoginPage extends AbstractComponent {
 
     WebDriver driverReference;
 
 
 
     public LoginPage(WebDriver driver) {
+        super(driver); // send driver object to the parent class -> AbstractComponent
         this.driverReference = driver;
 
         // substitute for driver.findElement()
@@ -27,14 +29,13 @@ public class LoginPage {
     @FindBy(id="login")
     public WebElement loginBtn;
 
-    public void launchApp(){
-        this.driverReference.get("https://rahulshettyacademy.com/client");
 
-    }
 
-    public void loginToApp(String user, String pass){
+    public HomePage loginToApp(String user, String pass){
         this.userName.sendKeys(user);
         this.password.sendKeys(pass);
         loginBtn.click();
+
+        return new HomePage(driverReference);
     }
 }

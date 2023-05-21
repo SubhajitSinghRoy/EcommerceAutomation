@@ -1,7 +1,7 @@
 package com.pageObjects;
 
+import com.AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CartPage {
+public class CartPage extends AbstractComponent {
 
     WebDriver driver;
 
@@ -17,6 +17,7 @@ public class CartPage {
    WebElement checkoutBtn;
 
     public CartPage(WebDriver driver){
+        super(driver);
         this.driver=driver;
         PageFactory.initElements(driver,this);
     }
@@ -33,12 +34,11 @@ public class CartPage {
 
     }
 
-    public void clickCheckoutButton() throws InterruptedException {
+    public CheckOutPage clickCheckoutButton() throws InterruptedException {
 
-       // Thread.sleep(3000);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-           js.executeScript("arguments[0].scrollIntoView();",  this.checkoutBtn );
-           js.executeScript("arguments[0].click();", this.checkoutBtn);
+        javaScriptExecutorClick(this.checkoutBtn);
+        return new CheckOutPage(driver);
+
 
     }
 }

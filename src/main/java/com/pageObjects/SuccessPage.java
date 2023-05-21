@@ -1,11 +1,12 @@
 package com.pageObjects;
 
+import com.AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SuccessPage {
+public class SuccessPage extends AbstractComponent {
 
     WebDriver driver;
 
@@ -13,6 +14,7 @@ public class SuccessPage {
     WebElement successMessage;
 
     public SuccessPage(WebDriver driver){
+        super(driver);
         this.driver=driver;
         PageFactory.initElements(driver,this);
     }
