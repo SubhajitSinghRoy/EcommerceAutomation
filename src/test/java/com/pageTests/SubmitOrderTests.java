@@ -9,11 +9,13 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SubmitOrderTests extends BaseTest {
 
+    public List<String> itemnames=null;
     //public WebDriver driver;
 
     public SubmitOrderTests() throws IOException {
@@ -23,7 +25,7 @@ public class SubmitOrderTests extends BaseTest {
     @Test
     public void orderTest() throws InterruptedException, IOException {
 
-        List<String> itemnames = new ArrayList<>();
+        itemnames= new ArrayList<>();
         itemnames.add("adidas original");
         itemnames.add("zara coat 3");
         itemnames.add("iphone 13 pro");
@@ -37,10 +39,26 @@ public class SubmitOrderTests extends BaseTest {
         CheckOutPage checkOutPage = cartPage.clickCheckoutButton();
         checkOutPage.fillCountryName("India");
 
+        Collections.sort(itemnames);
+
+
         SuccessPage successPage = checkOutPage.orderItems();
         Assert.assertTrue(successPage.returnSuccessMessage().equalsIgnoreCase("THANKYOU FOR THE ORDER."),
                 "The expected and the actual message do not match");
 
+
+        Assert.assertTrue(successPage.itemListSuccessPage().equals(itemnames),"ItemList do not match " +
+                "expected was \n" +itemnames+ " whereas actual is \n"+successPage.itemListSuccessPage());
+
+        successPage.logOutBtnClick();
+    }
+
+    @Test(dependsOnMethods = {"orderTest"})
+    public void itemsPresentOnSuccessPage() throws InterruptedException {
+
+        HomePage homePage = loginPage.loginToApp("testingsubhajit220@gmail.com", "Aug@1234");
+        OrderPage orderPage = homePage.clickOrderBtn();
+        //Assert.assertTrue(orderPage.validateOrders( itemnames),"the items ordered are not correctly reflected");
 
     }
 }

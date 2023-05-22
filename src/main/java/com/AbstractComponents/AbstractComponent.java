@@ -1,6 +1,8 @@
 package com.AbstractComponents;
 
 import com.pageObjects.CartPage;
+import com.pageObjects.LoginPage;
+import com.pageObjects.OrderPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,14 +12,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class AbstractComponent {
 
     WebDriver webDriverReference;
 
     @FindBy(xpath = "(//button[@class='btn btn-custom'])[3]")
     WebElement cartBtn;
+
+    @FindBy(xpath="//*[contains(text(),'ORDERS')]")
+    WebElement orderBtn;
+
+    @FindBy(xpath = "//*[contains(text(),'Sign Out')]")
+    WebElement logOutBtn;
 
     public AbstractComponent(WebDriver driver) {
         this.webDriverReference=driver;
@@ -31,6 +37,12 @@ public class AbstractComponent {
     public CartPage clickCartButton() {
         this.cartBtn.click();
         return new CartPage(webDriverReference);
+    }
+
+    public OrderPage clickOrderBtn()
+    {
+    javaScriptExecutorClick(this.orderBtn);
+        return new OrderPage(webDriverReference);
     }
 
     public void hardWait(long millis) throws InterruptedException {
@@ -60,5 +72,11 @@ public class AbstractComponent {
         JavascriptExecutor js =(JavascriptExecutor) webDriverReference;
         js.executeScript("arguments[0].scrollIntoView();",element);
         js.executeScript("arguments[0].click();", element);
+    }
+
+    public LoginPage logOutBtnClick()
+    {
+        javaScriptExecutorClick(this.logOutBtn);
+        return new LoginPage(webDriverReference);
     }
 }
