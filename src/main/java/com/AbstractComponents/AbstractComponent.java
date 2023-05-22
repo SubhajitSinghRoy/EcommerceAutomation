@@ -74,9 +74,9 @@ public class AbstractComponent {
         js.executeScript("arguments[0].click();", element);
     }
 
-    public LoginPage logOutBtnClick()
-    {
+    public LoginPage logOutBtnClick() throws InterruptedException {
         javaScriptExecutorClick(this.logOutBtn);
+        hardWait(3000);
         return new LoginPage(webDriverReference);
     }
 }

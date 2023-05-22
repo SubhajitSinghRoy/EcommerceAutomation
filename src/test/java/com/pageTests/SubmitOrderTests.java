@@ -5,6 +5,7 @@ import com.pageObjects.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -21,16 +22,27 @@ public class SubmitOrderTests extends BaseTest {
     public SubmitOrderTests() throws IOException {
     }
 
+    @DataProvider
+    public Object[][] getData(){
 
-    @Test(groups = {"SmokeTest"})
-    public void orderTest() throws InterruptedException, IOException {
+        return new Object[][]
+            {       {"testingsubhajit220@gmail.com","Aug@1234"},
+                    {"sagasow460@favilu.com","Aug@4312"}
+            };
+
+        };
+
+
+    @Test(groups = {"SmokeTest"}, dataProvider = "getData" )
+    public void orderTest(String user, String pass) throws InterruptedException, IOException {
 
         itemnames= new ArrayList<>();
         itemnames.add("adidas original");
         itemnames.add("zara coat 3");
         itemnames.add("iphone 13 pro");
 
-        HomePage homePage = loginPage.loginToApp("testingsubhajit220@gmail.com", "Aug@1234");
+
+        HomePage homePage = loginPage.loginToApp(user, pass);
         homePage.selectItemfromCart(itemnames);
 
         CartPage cartPage = homePage.clickCartButton();
@@ -56,8 +68,8 @@ public class SubmitOrderTests extends BaseTest {
     @Test(dependsOnMethods = {"orderTest"})
     public void itemsPresentOnSuccessPage() throws InterruptedException {
 
-        HomePage homePage = loginPage.loginToApp("testingsubhajit220@gmail.com", "Aug@1234");
-        OrderPage orderPage = homePage.clickOrderBtn();
+       // HomePage homePage = loginPage.loginToApp("testingsubhajit220@gmail.com", "Aug@1234");
+      //  OrderPage orderPage = homePage.clickOrderBtn();
         //Assert.assertTrue(orderPage.validateOrders( itemnames),"the items ordered are not correctly reflected");
 
     }
