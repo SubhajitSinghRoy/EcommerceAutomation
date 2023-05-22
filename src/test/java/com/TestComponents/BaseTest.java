@@ -43,14 +43,14 @@ public class BaseTest {
         return new LoginPage(driver);
     }
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true) // to avoid giving each of the groups
     public void goToLoginPage() throws IOException {
 
         driver=initializeDriver();
         loginPage = launchApp(driver);
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true) // to avoid giving each of the groups
     public void quitApplication(){
         this.driver.quit();
     }

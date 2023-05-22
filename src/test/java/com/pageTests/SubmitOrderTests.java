@@ -22,7 +22,7 @@ public class SubmitOrderTests extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = {"SmokeTest"})
     public void orderTest() throws InterruptedException, IOException {
 
         itemnames= new ArrayList<>();

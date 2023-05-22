@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite  parallel="tests" name="All Test Suite">
+    <test name="Error Validation Tests" thread-count="5">
+        <classes>
+            <class name="com.pageTests.ErrorValidationTests"></class>
+        </classes>
+    </test>
+
+
+    <test name=" No Product tests" thread-count="5">
+        <classes>
+            <class name="com.pageTests.NoProductTests">
+            </class>
+        </classes>
+    </test>
+
+    <test name="Submit Order Tests" thread-count="5">
+        <classes>
+            <class name="com.pageTests.SubmitOrderTests">
+
+            </class>
+        </classes>
+    </test>
+</suite>
