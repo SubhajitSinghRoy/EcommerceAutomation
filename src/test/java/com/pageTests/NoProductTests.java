@@ -27,7 +27,7 @@ public class NoProductTests extends BaseTest {
 
 
        cartPage.removeAllProductsFromCart();
-        cartPage.noProductMsgValidation();
+        cartPage.noProductMsgValidationCorrect();
 
     }
 
@@ -46,7 +46,7 @@ public class NoProductTests extends BaseTest {
 
 
         cartPage.removeAllProductsFromCart();
-        cartPage.noProductMsgValidation();
+        cartPage.noProductMsgValidationIncorrect();
 
     }
 }

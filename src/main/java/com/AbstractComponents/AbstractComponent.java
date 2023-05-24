@@ -18,6 +18,9 @@ public class AbstractComponent {
 
     WebDriver driver;
 
+    public static String CORRECT_NO_PRODUCT_MSG="No Products in Your Cart !";
+    public static String INCORRECT_NO_PRODUCT_MSG="No Products in Your Cart !?";
+
     @FindBy(xpath = "(//button[@class='btn btn-custom'])[3]")
     WebElement cartBtn;
 
