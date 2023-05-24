@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -59,8 +60,10 @@ public class CartPage extends AbstractComponent {
 
     }
 
-    public String NoProductMsg() {
-        return noProductMsg.getText();
+    public void noProductMsgValidation() {
+
+        Assert.assertTrue(
+        noProductMsg.getText().equalsIgnoreCase("No Products in Your Cart !?"),"No Match");
     }
 }
 

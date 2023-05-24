@@ -8,16 +8,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AbstractComponent {
 
-    WebDriver driverReference;
+    WebDriver driver;
 
 
 
     public LoginPage(WebDriver driver) {
         super(driver); // send driver object to the parent class -> AbstractComponent
-        this.driverReference = driver;
+        this.driver = driver;
 
         // substitute for driver.findElement()
-        PageFactory.initElements(driverReference,this);
+        PageFactory.initElements(driver,this);
     }
 
     @FindBy(id="userEmail")
@@ -39,7 +39,7 @@ public class LoginPage extends AbstractComponent {
         this.password.sendKeys(pass);
         loginBtn.click();
 
-        return new HomePage(driverReference);
+        return new HomePage(driver);
     }
 
     public String errorMessage()

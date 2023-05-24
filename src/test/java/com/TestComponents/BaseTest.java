@@ -1,11 +1,15 @@
 package com.TestComponents;
 
 import com.pageObjects.LoginPage;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -53,6 +57,18 @@ public class BaseTest {
     @AfterTest(alwaysRun = true) // to avoid giving each of the groups
     public void quitApplication(){
         this.driver.quit();
+    }
+
+    public String getScreenshot(String name, WebDriver driver) throws IOException {
+
+        TakesScreenshot takesScreenshot =((TakesScreenshot)driver);
+
+        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+        File file = new File("C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\" +name+".png");
+        FileUtils.copyFile(source , file);
+
+        return "C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\"+name+".png";
+
     }
 
 }

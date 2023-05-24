@@ -3,18 +3,20 @@ package com.AbstractComponents;
 import com.pageObjects.CartPage;
 import com.pageObjects.LoginPage;
 import com.pageObjects.OrderPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AbstractComponent {
 
-    WebDriver webDriverReference;
+    WebDriver driver;
 
     @FindBy(xpath = "(//button[@class='btn btn-custom'])[3]")
     WebElement cartBtn;
@@ -26,8 +28,8 @@ public class AbstractComponent {
     WebElement logOutBtn;
 
     public AbstractComponent(WebDriver driver) {
-        this.webDriverReference=driver;
-        PageFactory.initElements(webDriverReference,this);
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
 
     }
 
@@ -36,13 +38,13 @@ public class AbstractComponent {
 
     public CartPage clickCartButton() {
         this.cartBtn.click();
-        return new CartPage(webDriverReference);
+        return new CartPage(driver);
     }
 
     public OrderPage clickOrderBtn()
     {
     javaScriptExecutorClick(this.orderBtn);
-        return new OrderPage(webDriverReference);
+        return new OrderPage(driver);
     }
 
     public void hardWait(long millis) throws InterruptedException {
@@ -50,26 +52,26 @@ public class AbstractComponent {
     }
 
     public void waitForElementToAppear(By byLocator){
-        WebDriverWait wait=  new WebDriverWait(webDriverReference,5000);
+        WebDriverWait wait=  new WebDriverWait(driver,5000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
 
     }
 
     public void waitForElementToDisappear(By byLocator){
 
-        WebDriverWait wait = new WebDriverWait(webDriverReference,5000);
+        WebDriverWait wait = new WebDriverWait(driver,5000);
            wait.until(ExpectedConditions.invisibilityOfElementLocated(byLocator));
     }
 
     public void waitForWebElementToAppear(WebElement webElement){
 
-        WebDriverWait wait = new WebDriverWait(webDriverReference,5000);
+        WebDriverWait wait = new WebDriverWait(driver,5000);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public void javaScriptExecutorClick(WebElement element){
 
-        JavascriptExecutor js =(JavascriptExecutor) webDriverReference;
+        JavascriptExecutor js =(JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();",element);
         js.executeScript("arguments[0].click();", element);
     }
@@ -77,6 +79,8 @@ public class AbstractComponent {
     public LoginPage logOutBtnClick() throws InterruptedException {
         javaScriptExecutorClick(this.logOutBtn);
         hardWait(3000);
-        return new LoginPage(webDriverReference);
+        return new LoginPage(driver);
     }
+
+
 }

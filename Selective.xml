@@ -6,25 +6,29 @@
             <include name="SmokeTest"/>
         </run>
     </groups>
+    <listeners>
+        <listener class-name="com.TestComponents.Listeners"></listener>
+    </listeners>
 
-   <!-- <test name="Error Validation Tests" thread-count="5">
-        <classes>
-            <class name="com.pageTests.ErrorValidationTests"></class>
-        </classes>
-    </test> -->
 
-    <!--<test name=" No Product tests" thread-count="5">
+    <!-- <test name="Error Validation Tests" thread-count="5">
+         <classes>
+             <class name="com.pageTests.ErrorValidationTests"></class>
+         </classes>
+     </test> -->
+
+    <test name=" No Product tests" thread-count="5">
         <classes>
             <class name="com.pageTests.NoProductTests">
             </class>
         </classes>
-    </test> -->
-
-    <test name="Submit Order Tests" thread-count="5">
-        <classes>
-            <class name="com.pageTests.SubmitOrderTests">
-            </class>
-        </classes>
     </test>
+
+    <!-- <test name="Submit Order Tests" thread-count="5">
+         <classes>
+             <class name="com.pageTests.SubmitOrderTests">
+             </class>
+         </classes>
+     </test> -->
 
 </suite>
