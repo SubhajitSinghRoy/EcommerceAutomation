@@ -60,10 +60,15 @@ public class CartPage extends AbstractComponent {
 
     }
 
-    public void noProductMsgValidation() {
+    public void noProductMsgValidationCorrect() {
 
         Assert.assertTrue(
-        noProductMsg.getText().equalsIgnoreCase("No Products in Your Cart !?"),"No Match");
+        noProductMsg.getText().equalsIgnoreCase(CORRECT_NO_PRODUCT_MSG),"No Match");
+    }
+
+    public void noProductMsgValidationIncorrect() {
+        Assert.assertTrue(
+        noProductMsg.getText().equalsIgnoreCase(INCORRECT_NO_PRODUCT_MSG),"No Match");
     }
 }
 
