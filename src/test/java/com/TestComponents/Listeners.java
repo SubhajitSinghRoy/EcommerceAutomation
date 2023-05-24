@@ -3,6 +3,7 @@ package com.TestComponents;
 import com.AbstractComponents.TestNGReport;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -14,23 +15,28 @@ public class Listeners extends BaseTest implements ITestListener {
 
     ExtentTest extentTest;
 
+    ThreadLocal<ExtentTest> threadLocal = new ThreadLocal<>(); // thread safe
+
     ExtentReports extentReports= TestNGReport.extentReportSetup();
     @Override
     public void onTestStart(ITestResult result) {
 
         extentTest=extentReports.createTest(result.getMethod().getMethodName());
+        threadLocal.set(extentTest); // each test objects would have an unique thread id
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
 
+        threadLocal.get().log(Status.PASS,"Test Passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
 
         // publish fail reason
-        extentTest.fail(result.getThrowable());
+       // extentTest.
+                threadLocal.get().fail(result.getThrowable());// fetch the unique thread id for the test object
         // take screenshot
         String filePath=null;
         WebDriver driver =
@@ -48,7 +54,7 @@ public class Listeners extends BaseTest implements ITestListener {
         }
         // attach screenshot to report
 
-        extentTest.addScreenCaptureFromPath(filePath,
+        threadLocal.get().addScreenCaptureFromPath(filePath,
                 result.getMethod().getMethodName());
 
     }
