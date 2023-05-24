@@ -1,5 +1,6 @@
 package com.pageTests;
 
+import com.AbstractComponents.RetryAnalyzer;
 import com.TestComponents.BaseTest;
 import com.pageObjects.CartPage;
 import com.pageObjects.CheckOutPage;
@@ -12,7 +13,9 @@ import java.util.List;
 
 public class NoProductTests extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = com.AbstractComponents.RetryAnalyzer.class)
+    // can't use multiple listeners - as already ITestListener is used
+
     public void validateNoProductMessage() throws InterruptedException {
         List<String> itemnames = new ArrayList<>();
         itemnames.add("adidas original");
