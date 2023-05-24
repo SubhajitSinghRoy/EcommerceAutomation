@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -26,7 +27,9 @@ public class BaseTest {
         Properties prop = new Properties();
         prop.load(fis);
 
-        if (prop.getProperty("browser").equalsIgnoreCase("chrome")) {
+        String browser= System.getProperty("browser")!=null? System.getProperty("browser"):prop.getProperty("browser");
+
+        if (browser.equalsIgnoreCase("chrome")) {
 
 
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
@@ -36,7 +39,17 @@ public class BaseTest {
             driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
             return driver;
         }
-        else return driver;
+        else if (browser.equalsIgnoreCase("firefox"))
+        {
+            System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver2.exe");
+            driver = new FirefoxDriver();
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+            return driver;
+        }
+
+            return driver;
     }
 
 

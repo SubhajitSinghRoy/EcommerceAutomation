@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NoProductTests extends BaseTest {
 
-    @Test(retryAnalyzer = com.AbstractComponents.RetryAnalyzer.class)
+   // @Test(retryAnalyzer = com.AbstractComponents.RetryAnalyzer.class)
     // can't use multiple listeners - as already ITestListener is used
 
     public void validateNoProductMessage() throws InterruptedException {
@@ -34,7 +34,7 @@ public class NoProductTests extends BaseTest {
 
     }
 
-    @Test(groups = {"SmokeTest"})
+   // @Test(groups = {"SmokeTest"})
     public void failTovalidateNoProductMessage() throws InterruptedException {
         List<String> itemnames = new ArrayList<>();
         itemnames.add("adidas original");

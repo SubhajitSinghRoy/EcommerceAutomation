@@ -13,7 +13,6 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
         if (max>count) {
          count++;
-         System.out.println("value of count is \n" +count);
             return true;
         }
        else

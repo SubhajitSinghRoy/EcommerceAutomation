@@ -72,5 +72,83 @@
             <version>3.141.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+        </dependency>
+
+
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>Regression</id>
+            <build>
+<!-- to run this profile use mvn test -PRegression-->
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <configuration>
+                                <suiteXmlFiles>
+                                    <suiteXmlFile>testng.xml</suiteXmlFile>
+                                </suiteXmlFiles>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+
+        </profile>
+
+        <profile>
+            <id>Smoke</id>
+            <build>
+                <!-- to run this profile use mvn test -PSmoke-->
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <configuration>
+                                <suiteXmlFiles>
+                                    <suiteXmlFile>Selective.xml</suiteXmlFile>
+                                </suiteXmlFiles>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+
+        </profile>
+
+
+        <profile>
+            <id>Sanity</id>
+            <build>
+                <!-- to run this profile use mvn test -PSanity-->
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <configuration>
+                                <suiteXmlFiles>
+                                    <suiteXmlFile>ParallelTests.xml</suiteXmlFile>
+                                </suiteXmlFiles>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+
+        </profile>
+    </profiles>
+
+
 </project>
