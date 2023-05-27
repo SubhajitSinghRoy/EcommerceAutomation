@@ -10,12 +10,15 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.junit.Cucumber;
+
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.List;
 
-
+@RunWith(Cucumber.class)
 public class MyStepDefinition extends BaseTest {
 
     public WebDriver driver;
