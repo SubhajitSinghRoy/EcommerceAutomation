@@ -37,6 +37,24 @@ public class HomePage extends AbstractComponent {
             waitForElementToAppear(By.id("toast-container"));
             waitForElementToDisappear(By.id("toast-container"));
         }
+
+    }
+
+
+    public void selectItemfromCart(String itemname) {
+
+
+
+            WebElement itemForCart = driver.findElement(By.xpath("(//b[contains(text(),'"
+                    + itemname + "')]//parent::h5//following-sibling::button)[2]"));
+
+            itemForCart.click();
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+
+            waitForElementToAppear(By.id("toast-container"));
+            waitForElementToDisappear(By.id("toast-container"));
+
+
     }
 
 

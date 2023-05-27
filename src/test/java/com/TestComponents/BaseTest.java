@@ -2,10 +2,12 @@ package com.TestComponents;
 
 import com.pageObjects.LoginPage;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -30,8 +32,6 @@ public class BaseTest {
         String browser= System.getProperty("browser")!=null? System.getProperty("browser"):prop.getProperty("browser");
 
         if (browser.equalsIgnoreCase("chrome")) {
-
-
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
             driver = new ChromeDriver();
             driver.manage().window().maximize();
@@ -47,6 +47,21 @@ public class BaseTest {
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
             return driver;
+        }
+
+        else if (browser.equalsIgnoreCase("headless")){
+
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("headless");
+            driver = new ChromeDriver(options);
+
+            driver.manage().window().setSize(new Dimension(1440,900));// fullscreen above maximize
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+            return driver;
+
+
         }
 
             return driver;

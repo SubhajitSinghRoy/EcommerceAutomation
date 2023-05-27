@@ -41,6 +41,17 @@ public class CartPage extends AbstractComponent {
 
     }
 
+
+    public void verifyItemPresentInCart(String itemname) {
+
+            if (!driver.findElement(By.xpath("//*[text()='" +
+                    itemname +
+                    "']")).isDisplayed() == true)
+                throw new RuntimeException("item Not visible in the cart");
+
+
+        }
+
     public CheckOutPage clickCheckoutButton() throws InterruptedException {
 
         javaScriptExecutorClick(this.checkoutBtn);

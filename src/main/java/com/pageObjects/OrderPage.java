@@ -36,4 +36,11 @@ public boolean validateOrders(List<String> items) throws InterruptedException {
     }
     return orderItems.equals(items);
 }
+
+    public boolean validateOrders(String item) throws InterruptedException {
+
+        List<String> orderlist=null;
+        hardWait(4000);
+        return orderItems.equals(orderItems.get(0).getText());
+    }
 }
