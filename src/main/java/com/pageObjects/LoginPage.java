@@ -8,43 +8,49 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AbstractComponent {
 
-    WebDriver driver;
+	WebDriver driver;
 
+	public LoginPage(WebDriver driver) {
+		super(driver); // send driver object to the parent class -> AbstractComponent
+		this.driver = driver;
 
+		// substitute for driver.findElement()
+		PageFactory.initElements(driver, this);
+	}
 
-    public LoginPage(WebDriver driver) {
-        super(driver); // send driver object to the parent class -> AbstractComponent
-        this.driver = driver;
+	@FindBy(id = "userEmail")
+	public WebElement userName;
 
-        // substitute for driver.findElement()
-        PageFactory.initElements(driver,this);
-    }
+	@FindBy(id = "userPassword")
+	public WebElement password;
 
-    @FindBy(id="userEmail")
-    public WebElement userName;
+	@FindBy(id = "login")
+	public WebElement loginBtn;
 
-    @FindBy(id="userPassword")
-    public WebElement password;
+	@FindBy(xpath = "//div[@role='alert']")
+	WebElement loginErrorAlert;
 
-    @FindBy(id="login")
-    public WebElement loginBtn;
+	public HomePage loginToApp(String user, String pass) {
+		this.userName.sendKeys(user);
+		this.password.sendKeys(pass);
+		loginBtn.click();
 
-    @FindBy(xpath = "//div[@role='alert']")
-    WebElement loginErrorAlert;
+		return new HomePage(driver);
+	}
 
+	public String errorMessage() {
+		waitForWebElementToAppear(loginErrorAlert);
+		return loginErrorAlert.getText();
+	}
 
+	public boolean loginError(String user, String pass) {
+		this.userName.sendKeys(user);
+		this.password.sendKeys(pass);
+		loginBtn.click();
+		if (errorMessage() != null)
 
-    public HomePage loginToApp(String user, String pass){
-        this.userName.sendKeys(user);
-        this.password.sendKeys(pass);
-        loginBtn.click();
-
-        return new HomePage(driver);
-    }
-
-    public String errorMessage()
-    {
-        waitForWebElementToAppear(loginErrorAlert);
-        return loginErrorAlert.getText();
-    }
+			return true;
+		else
+			return false;
+	}
 }
