@@ -55,20 +55,20 @@ public class AbstractComponent {
     }
 
     public void waitForElementToAppear(By byLocator){
-        WebDriverWait wait=  new WebDriverWait(driver,5000);
+        WebDriverWait wait=  new WebDriverWait(driver,5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
 
     }
 
     public void waitForElementToDisappear(By byLocator){
 
-        WebDriverWait wait = new WebDriverWait(driver,5000);
+        WebDriverWait wait = new WebDriverWait(driver,5);
            wait.until(ExpectedConditions.invisibilityOfElementLocated(byLocator));
     }
 
     public void waitForWebElementToAppear(WebElement webElement){
 
-        WebDriverWait wait = new WebDriverWait(driver,5000);
+        WebDriverWait wait = new WebDriverWait(driver,5);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
