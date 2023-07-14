@@ -1,6 +1,10 @@
 package com.TestComponents;
 
+import com.pageObjects.CartPage;
+import com.pageObjects.HomePage;
 import com.pageObjects.LoginPage;
+import com.pageObjects.OrderPage;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -20,83 +24,86 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-   public  WebDriver driver;
-    public LoginPage loginPage;
+	public WebDriver driver;
+	public static LoginPage loginPage;
+	public static HomePage homePage;
+	public static CartPage cartPage;
+	public static OrderPage orderPage;
 
-    public WebDriver initializeDriver() throws IOException {
+	ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
-        FileInputStream fis = new FileInputStream("src/main/resources/GlobalData.properties");
-        Properties prop = new Properties();
-        prop.load(fis);
+	public WebDriver initializeDriver() throws IOException {
 
-        String browser= System.getProperty("browser")!=null? System.getProperty("browser"):prop.getProperty("browser");
+		FileInputStream fis = new FileInputStream("src/main/resources/GlobalData.properties");
+		Properties prop = new Properties();
+		prop.load(fis);
 
-        if (browser.equalsIgnoreCase("chrome")) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-            driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-            return driver;
-        }
-        else if (browser.equalsIgnoreCase("firefox"))
-        {
-            System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver2.exe");
-            driver = new FirefoxDriver();
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-            driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-            return driver;
-        }
+		String browser = System.getProperty("browser") != null ? System.getProperty("browser")
+				: prop.getProperty("browser");
 
-        else if (browser.equalsIgnoreCase("headless")){
+		if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+			
+			
+		} else if (browser.equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver2.exe");
+			driver = new FirefoxDriver();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("headless");
-            driver = new ChromeDriver(options);
+		}
 
-            driver.manage().window().setSize(new Dimension(1440,900));// fullscreen above maximize
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-            driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-            return driver;
+		else if (browser.equalsIgnoreCase("headless")) {
 
+			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			driver = new ChromeDriver(options);
 
-        }
+			driver.manage().window().setSize(new Dimension(1440, 900));// fullscreen above maximize
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+		}
 
-            return driver;
-    }
+		threadLocalDriver.set(driver);
+		//return threadLocalDriver.get();
+		return driver;
+	}
 
+	public LoginPage launchApp(WebDriver driver) {
+		driver.get("https://rahulshettyacademy.com/client");
 
+		return new LoginPage(driver);
+	}
 
-    public LoginPage launchApp(WebDriver driver){
-        driver.get("https://rahulshettyacademy.com/client");
+	@BeforeTest(alwaysRun = true) // to avoid giving each of the groups
+	public void goToLoginPage() throws IOException {
 
-        return new LoginPage(driver);
-    }
+		driver = initializeDriver();
+		loginPage = launchApp(driver);
+	}
 
-    @BeforeTest(alwaysRun = true) // to avoid giving each of the groups
-    public void goToLoginPage() throws IOException {
+	@AfterTest(alwaysRun = true) // to avoid giving each of the groups
+	public void quitApplication() {
+		driver.quit();
+	}
 
-        driver=initializeDriver();
-        loginPage = launchApp(driver);
-    }
+	public String getScreenshot(String name, WebDriver driver) throws IOException {
 
-    @AfterTest(alwaysRun = true) // to avoid giving each of the groups
-    public void quitApplication(){
-        this.driver.quit();
-    }
+		TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
 
-    public String getScreenshot(String name, WebDriver driver) throws IOException {
+		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+		File file = new File("C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\"
+				+ name + ".png");
+		FileUtils.copyFile(source, file);
 
-        TakesScreenshot takesScreenshot =((TakesScreenshot)driver);
+		return "C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\" + name + ".png";
 
-        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        File file = new File("C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\" +name+".png");
-        FileUtils.copyFile(source , file);
-
-        return "C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\"+name+".png";
-
-    }
+	}
 
 }
