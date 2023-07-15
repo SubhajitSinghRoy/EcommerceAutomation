@@ -3,16 +3,11 @@ package com.AbstractComponents;
 import com.pageObjects.CartPage;
 import com.pageObjects.LoginPage;
 import com.pageObjects.OrderPage;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.TakesScreenshot;
-
-import java.io.File;
-import java.io.IOException;
 
 public class AbstractComponent {
 
