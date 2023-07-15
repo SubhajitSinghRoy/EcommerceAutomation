@@ -13,3 +13,13 @@ Feature: Submit Order Validation
     Examples: 
       | user                         | password |
       | testingsubhajit220@gmail.com | Aug@1234 |
+      
+   @tag2
+  Scenario Outline: UnSuccessful Order Submission
+    Given I navigate to the login page
+    When I give incorrect "<user>" and "<password>"
+    Then validate that the error message displayed
+
+    Examples: 
+      | user                         | password |
+      | testing1subhajit220@gmail.com | Aug@1234 |
