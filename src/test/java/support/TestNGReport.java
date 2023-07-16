@@ -1,4 +1,4 @@
-package com.AbstractComponents;
+package support;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;

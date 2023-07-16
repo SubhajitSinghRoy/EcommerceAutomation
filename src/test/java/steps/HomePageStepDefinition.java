@@ -1,4 +1,4 @@
-package com.stepDefinition;
+package steps;
 
 import com.TestComponents.BaseTest;
 import io.cucumber.java.en.Then;

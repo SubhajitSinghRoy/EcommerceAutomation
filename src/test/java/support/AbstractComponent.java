@@ -1,13 +1,14 @@
-package com.AbstractComponents;
+package support;
 
-import com.pageObjects.CartPage;
-import com.pageObjects.LoginPage;
-import com.pageObjects.OrderPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import pages.CartPage;
+import pages.LoginPage;
+import pages.OrderPage;
 
 public class AbstractComponent {
 

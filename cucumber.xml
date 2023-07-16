@@ -8,7 +8,7 @@
 	<!-- src/test/java/com/TestComponents/Listeners.java  -->
 	<test name="Cucumber Tests">
 		<classes>
-			<class name="com.CucumberTests.RunnerClass">
+			<class name="runner.RunnerClass">
 			</class>
 		</classes>
 	</test>

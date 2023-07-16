@@ -1,10 +1,5 @@
 package com.TestComponents;
 
-import com.pageObjects.CartPage;
-import com.pageObjects.HomePage;
-import com.pageObjects.LoginPage;
-import com.pageObjects.OrderPage;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -15,6 +10,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
+import pages.CartPage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.OrderPage;
 
 import java.io.File;
 import java.io.FileInputStream;

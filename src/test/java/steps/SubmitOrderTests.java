@@ -1,7 +1,9 @@
-package com.pageTests;
+package steps;
 
 import com.TestComponents.BaseTest;
-import com.pageObjects.*;
+
+import pages.*;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;

@@ -1,7 +1,9 @@
-package com.pageTests;
+package steps;
 
 import com.TestComponents.BaseTest;
-import com.pageObjects.HomePage;
+
+import pages.HomePage;
+
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

@@ -1,10 +1,12 @@
-package com.pageTests;
+package steps;
 
-import com.AbstractComponents.RetryAnalyzer;
+import support.RetryAnalyzer;
 import com.TestComponents.BaseTest;
-import com.pageObjects.CartPage;
-import com.pageObjects.CheckOutPage;
-import com.pageObjects.HomePage;
+
+import pages.CartPage;
+import pages.CheckOutPage;
+import pages.HomePage;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
