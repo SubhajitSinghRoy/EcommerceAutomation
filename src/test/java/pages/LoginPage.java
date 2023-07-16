@@ -1,17 +1,16 @@
 package pages;
 
-import support.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends AbstractComponent {
+public class LoginPage extends CommonProperties {
 
 	WebDriver driver;
 
 	public LoginPage(WebDriver driver) {
-		super(driver); // send driver object to the parent class -> AbstractComponent
+		super(driver); // send driver object to the parent class -> CommonProperties
 		this.driver = driver;
 
 		// substitute for driver.findElement()

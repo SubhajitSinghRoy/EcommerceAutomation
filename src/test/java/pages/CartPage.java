@@ -1,6 +1,5 @@
 package pages;
 
-import support.AbstractComponent;
 import support.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +10,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class CartPage extends AbstractComponent {
+public class CartPage extends CommonProperties {
 
 	WebDriver driver;
 

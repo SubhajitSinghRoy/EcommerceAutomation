@@ -1,4 +1,4 @@
-package support;
+package pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -6,11 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pages.CartPage;
-import pages.LoginPage;
-import pages.OrderPage;
-
-public class AbstractComponent {
+public class CommonProperties {
 
     WebDriver driver;
 
@@ -25,14 +21,14 @@ public class AbstractComponent {
     @FindBy(xpath = "//*[contains(text(),'Sign Out')]")
     WebElement logOutBtn;
 
-    public AbstractComponent(WebDriver driver) {
+    public CommonProperties(WebDriver driver) {
         this.driver=driver;
         PageFactory.initElements(driver,this);
 
     }
 
 
-    // this method is kept in AbstractComponent as it is common for many pages
+    // this method is kept in CommonProperties as it is common for many pages
 
     public CartPage clickCartButton() {
         this.cartBtn.click();

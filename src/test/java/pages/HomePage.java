@@ -1,6 +1,5 @@
 package pages;
 
-import support.AbstractComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage extends AbstractComponent {
+public class HomePage extends CommonProperties {
 
     WebDriver driver;
 

@@ -1,6 +1,5 @@
 package pages;
 
-import support.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +8,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class OrderPage extends AbstractComponent {
+public class OrderPage extends CommonProperties {
 
     WebDriver driver;
 @FindBy(xpath="(//img//parent::td//following-sibling::td[1])")

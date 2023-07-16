@@ -1,7 +1,6 @@
 package steps;
 
 import pages.HomePage;
-import support.Base;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

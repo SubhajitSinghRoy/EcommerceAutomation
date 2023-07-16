@@ -14,14 +14,13 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import support.Base;
 
 import java.io.IOException;
 
 import org.testng.Assert;
 
 
-public class LoginStepDefinition extends Base {
+public class LoginPageSteps extends Base {
 
 	static ExtentReports extentReports;
 	static ExtentSparkReporter extentSparkReporter;

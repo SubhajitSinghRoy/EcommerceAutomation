@@ -1,9 +1,8 @@
 package steps;
 
 import io.cucumber.java.en.Then;
-import support.Base;
 
-public class HomePageStepDefinition extends Base{
+public class HomePageSteps extends Base{
 	
 	
 	

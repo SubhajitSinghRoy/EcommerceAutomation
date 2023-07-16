@@ -1,4 +1,4 @@
-package support;
+package steps;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
@@ -15,6 +15,7 @@ import pages.CartPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.OrderPage;
+import support.Constant;
 
 import java.io.File;
 import java.io.FileInputStream;

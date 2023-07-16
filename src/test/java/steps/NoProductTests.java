@@ -1,6 +1,5 @@
 package steps;
 
-import support.Base;
 import pages.CartPage;
 import pages.HomePage;
 
