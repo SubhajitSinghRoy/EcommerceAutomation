@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CheckOutPage extends CommonProperties {
+public class CheckOutPage extends CommonUtils {
 
     WebDriver driver;
 

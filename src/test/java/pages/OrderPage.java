@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class OrderPage extends CommonProperties {
+public class OrderPage extends CommonUtils {
 
     WebDriver driver;
 @FindBy(xpath="(//img//parent::td//following-sibling::td[1])")

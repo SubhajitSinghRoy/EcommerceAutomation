@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage extends CommonProperties {
+public class HomePage extends CommonUtils {
 
     WebDriver driver;
 

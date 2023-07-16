@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SuccessPage extends CommonProperties {
+public class SuccessPage extends CommonUtils {
 
     WebDriver driver;
 

@@ -5,12 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends CommonProperties {
+public class LoginPage extends CommonUtils {
 
 	WebDriver driver;
 
 	public LoginPage(WebDriver driver) {
-		super(driver); // send driver object to the parent class -> CommonProperties
+		super(driver); // send driver object to the parent class -> CommonUtils
 		this.driver = driver;
 
 		// substitute for driver.findElement()

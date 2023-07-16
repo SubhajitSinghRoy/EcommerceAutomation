@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CommonProperties {
+public class CommonUtils {
 
     WebDriver driver;
 
@@ -21,14 +21,14 @@ public class CommonProperties {
     @FindBy(xpath = "//*[contains(text(),'Sign Out')]")
     WebElement logOutBtn;
 
-    public CommonProperties(WebDriver driver) {
+    public CommonUtils(WebDriver driver) {
         this.driver=driver;
         PageFactory.initElements(driver,this);
 
     }
 
 
-    // this method is kept in CommonProperties as it is common for many pages
+    // this method is kept in CommonUtils as it is common for many pages
 
     public CartPage clickCartButton() {
         this.cartBtn.click();

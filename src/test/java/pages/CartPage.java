@@ -10,7 +10,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class CartPage extends CommonProperties {
+public class CartPage extends CommonUtils {
 
 	WebDriver driver;
 
