@@ -29,13 +29,14 @@ public class BaseTest {
 	public static HomePage homePage;
 	public static CartPage cartPage;
 	public static OrderPage orderPage;
+	public static Properties prop;
 
 	ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
 
 	public WebDriver initializeDriver() throws IOException {
 
 		FileInputStream fis = new FileInputStream("src/main/resources/GlobalData.properties");
-		Properties prop = new Properties();
+		prop = new Properties();
 		prop.load(fis);
 
 		String browser = System.getProperty("browser") != null ? System.getProperty("browser")
@@ -76,7 +77,7 @@ public class BaseTest {
 	}
 
 	public LoginPage launchApp(WebDriver driver) {
-		driver.get("https://rahulshettyacademy.com/client");
+		driver.get(prop.getProperty("url"));
 
 		return new LoginPage(driver);
 	}
