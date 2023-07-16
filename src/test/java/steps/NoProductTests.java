@@ -1,19 +1,13 @@
 package steps;
 
-import support.RetryAnalyzer;
-import com.TestComponents.BaseTest;
-
+import support.Base;
 import pages.CartPage;
-import pages.CheckOutPage;
 import pages.HomePage;
-
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoProductTests extends BaseTest {
+public class NoProductTests extends Base {
 
    // @Test(retryAnalyzer = com.AbstractComponents.RetryAnalyzer.class)
     // can't use multiple listeners - as already ITestListener is used

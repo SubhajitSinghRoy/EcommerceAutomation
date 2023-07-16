@@ -1,8 +1,7 @@
 package steps;
 
-import com.TestComponents.BaseTest;
-
 import pages.HomePage;
+import support.Base;
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -10,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
-public class ErrorValidationTests extends BaseTest {
+public class ErrorValidationTests extends Base {
 
 
     @DataProvider

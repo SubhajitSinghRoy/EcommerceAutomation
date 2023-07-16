@@ -1,6 +1,5 @@
 package steps;
 
-import com.TestComponents.BaseTest;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -15,12 +14,14 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import support.Base;
+
 import java.io.IOException;
 
 import org.testng.Assert;
 
 
-public class LoginStepDefinition extends BaseTest {
+public class LoginStepDefinition extends Base {
 
 	static ExtentReports extentReports;
 	static ExtentSparkReporter extentSparkReporter;

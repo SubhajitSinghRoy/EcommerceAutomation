@@ -1,6 +1,7 @@
 package pages;
 
 import support.AbstractComponent;
+import support.Constant;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,10 +69,10 @@ public class CartPage extends AbstractComponent {
 
 	public void noProductMsgValidationCorrect() {
 
-		Assert.assertTrue(noProductMsg.getText().equalsIgnoreCase(CORRECT_NO_PRODUCT_MSG), "No Match");
+		Assert.assertTrue(noProductMsg.getText().equalsIgnoreCase(Constant.CORRECT_NO_PRODUCT_MSG), "No Match");
 	}
 
 	public void noProductMsgValidationIncorrect() {
-		Assert.assertTrue(noProductMsg.getText().equalsIgnoreCase(INCORRECT_NO_PRODUCT_MSG), "No Match");
+		Assert.assertTrue(noProductMsg.getText().equalsIgnoreCase(Constant.INCORRECT_NO_PRODUCT_MSG), "No Match");
 	}
 }

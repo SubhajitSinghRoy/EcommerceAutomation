@@ -1,4 +1,4 @@
-package com.TestComponents;
+package support;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class BaseTest {
+public class Base {
 
 	public WebDriver driver;
 	public static LoginPage loginPage;
@@ -35,7 +35,7 @@ public class BaseTest {
 
 	public WebDriver initializeDriver() throws IOException {
 
-		FileInputStream fis = new FileInputStream("src/main/resources/GlobalData.properties");
+		FileInputStream fis = new FileInputStream(Constant.GLOBAL_PROPERTY_FILE_PATH);
 		prop = new Properties();
 		prop.load(fis);
 
@@ -43,7 +43,7 @@ public class BaseTest {
 				: prop.getProperty("browser");
 
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVER_FILE_PATH);
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -51,7 +51,7 @@ public class BaseTest {
 			
 			
 		} else if (browser.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver2.exe");
+			System.setProperty("webdriver.gecko.driver", Constant.GECKODRIVER_FILE_PATH);
 			driver = new FirefoxDriver();
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -61,7 +61,7 @@ public class BaseTest {
 
 		else if (browser.equalsIgnoreCase("headless")) {
 
-			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVER_FILE_PATH);
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
 			driver = new ChromeDriver(options);
@@ -99,11 +99,11 @@ public class BaseTest {
 		TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
 
 		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-		File file = new File("C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\"
+		File file = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\snapshots\\"
 				+ name + ".png");
 		FileUtils.copyFile(source, file);
 
-		return "C:\\Users\\Subha\\IdeaProjects\\EcommerceAutomation\\src\\main\\resources\\snapshots\\" + name + ".png";
+		return System.getProperty("user.dir")+"\\src\\main\\resources\\snapshots\\" + name + ".png";
 
 	}
 

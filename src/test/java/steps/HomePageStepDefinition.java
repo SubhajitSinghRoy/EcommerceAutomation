@@ -1,9 +1,9 @@
 package steps;
 
-import com.TestComponents.BaseTest;
 import io.cucumber.java.en.Then;
+import support.Base;
 
-public class HomePageStepDefinition extends BaseTest{
+public class HomePageStepDefinition extends Base{
 	
 	
 	

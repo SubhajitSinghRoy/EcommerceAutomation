@@ -1,6 +1,5 @@
-package com.TestComponents;
+package support;
 
-import support.TestNGReport;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -9,9 +8,8 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.IOException;
 
-public class Listeners extends BaseTest implements ITestListener {
+public class Listeners extends Base implements ITestListener {
 
     ExtentTest extentTest;
 
