@@ -12,14 +12,12 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.plugin.ConcurrentEventListener;
-import io.cucumber.plugin.event.*;
-
 import java.io.IOException;
+
+import org.testng.Assert;
 
 
 public class LoginStepDefinition extends BaseTest {
@@ -45,18 +43,11 @@ public class LoginStepDefinition extends BaseTest {
 	public void extentReportUse(io.cucumber.java.Scenario scenario) {
 
 		extentTest = extentReports.createTest(scenario.getName());
-	}
-	
-
-    
-
-   
+	}  
 	
 	@AfterStep
 	public void extentReportStep(io.cucumber.java.Scenario scenario) throws NoSuchFieldException, SecurityException {
-		
-
-		
+				
 		if (scenario.isFailed()==false)
 		{
 			
@@ -66,7 +57,7 @@ public class LoginStepDefinition extends BaseTest {
 	}
 
 	@After
-	public void cleanup() {
+	public void cleanup()  {
 		System.out.println("close the browser now");
 		quitApplication();
 		extentReports.flush();
@@ -80,8 +71,9 @@ public class LoginStepDefinition extends BaseTest {
 	}
 
 	@Then("validate the item {string} is visible in Cart Page")
-	public void validate_the_item_is_visible_in_cart_page(String string) {
+	public void validate_the_item_is_visible_in_cart_page(String itemName) {
 
+		Assert.assertTrue(cartPage.verifyItemPresentInCart(itemName), "Item present in Cart do not match");
 	}
 
 	@When("I give correct {string} and {string}")
@@ -99,9 +91,5 @@ public class LoginStepDefinition extends BaseTest {
 	public void validate_that_the_error_message_displayed() {
 
 	}
-
-	
-
-
 
 }

@@ -8,7 +8,7 @@ Feature: Submit Order Validation
     Given I navigate to the login page
     When I give correct "<user>" and "<password>"
     And I am able to select item "zara coat 3" from cart
-    Then validate the item "" is visible in Cart Page
+    Then validate the item "zara coat 3" is visible in Cart Page
 
     Examples: 
       | user                         | password |
