@@ -41,7 +41,7 @@ public class CommonUtils {
         return new OrderPage(driver);
     }
 
-    public void hardWait(long millis) throws InterruptedException {
+    public static void hardWait(long millis) throws InterruptedException {
         Thread.sleep(millis);
     }
 
