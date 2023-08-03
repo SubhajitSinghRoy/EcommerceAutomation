@@ -14,6 +14,8 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.CheckOutPage;
+import pages.SuccessPage;
 
 import java.io.IOException;
 
@@ -91,5 +93,25 @@ public class LoginPageSteps extends Base {
 	public void validate_that_the_error_message_displayed() {
 
 	}
+	
+	@When("user navigates to the checkout page")
+	public void user_navigates_to_the_checkout_page() throws InterruptedException{
+		
+		checkOutPage=cartPage.clickCheckoutButton();
+	}
 
+	@When("user places the order with all the details")
+	public void when_user_places_the_order_with_all_the_details() throws InterruptedException {
+		
+		checkOutPage.fillCountryName("india");
+		successPage=checkOutPage.orderItems();
+		
+	}
+	
+	@Then("user is able to see his order placed in the order page")
+	public void user_is_able_to_see_his_order_placed_in_the_order_page() {
+		
+	Assert.assertTrue(successPage.returnSuccessMessage().equals("THANKYOU FOR THE ORDER."),"success Message do not match"
+			+ "expected is THANKYOU FOR THE ORDER. whereas result is "+successPage.returnSuccessMessage());
+	}
 }

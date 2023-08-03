@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,13 +28,22 @@ public class CheckOutPage extends CommonUtils {
 
     public void fillCountryName(String name) throws InterruptedException {
 
+    	name="india";
         Actions actions = new Actions(this.driver);
-        hardWait(3000);
         javaScriptExecutorClick(this.selectCountryTxtBox);
-        actions.sendKeys(this.selectCountryTxtBox, "india").build().perform();
-        actions.click(driver.findElement(By.xpath("//button//span[(text()=' " +
-                name +
-                "')]"))).build().perform();
+        actions.sendKeys(this.selectCountryTxtBox, name).build().perform();
+        hardWait(3000);
+        List<WebElement> names=driver.findElements(By.xpath("//section//button//span"));
+        
+        
+        for (WebElement countryName : names)
+        {
+        	System.out.println(countryName.getText().trim().toLowerCase());
+        	if (countryName.getText().trim().toLowerCase().equals(name.toLowerCase()))
+        	
+        	javaScriptExecutorClick(countryName);
+        }
+       
     }
 
     public SuccessPage orderItems(){

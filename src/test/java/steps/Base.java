@@ -12,9 +12,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import pages.CartPage;
+import pages.CheckOutPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.OrderPage;
+import pages.SuccessPage;
 import support.Constant;
 
 import java.io.File;
@@ -30,6 +32,8 @@ public class Base {
 	public static HomePage homePage;
 	public static CartPage cartPage;
 	public static OrderPage orderPage;
+	public static CheckOutPage checkOutPage;
+	public static SuccessPage successPage;
 	public static Properties prop;
 
 	ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();

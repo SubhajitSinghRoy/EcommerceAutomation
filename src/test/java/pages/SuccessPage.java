@@ -31,7 +31,7 @@ public class SuccessPage extends CommonUtils {
 
     public String returnSuccessMessage(){
 
-        return this.successMessage.getText();
+        return this.successMessage.getText().trim().toUpperCase();
 
     }
     

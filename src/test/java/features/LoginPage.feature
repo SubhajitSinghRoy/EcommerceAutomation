@@ -1,8 +1,8 @@
 @tag
-Feature: Submit Order Validation
-  I want to use this feature to submit order and validate
+Feature: Login Page Validation
+  I want to use this feature to validate login functionality using various credentials
 
-  # Background: I launch the browser
+ 
   @tagl
   Scenario Outline: Successful Order Submission
     Given I navigate to the login page

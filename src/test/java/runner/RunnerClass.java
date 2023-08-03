@@ -6,7 +6,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 
-@CucumberOptions(features = "src/test/java/features/SubmitOrder.feature",
+@CucumberOptions(features = "src/test/java/features",
         glue = "steps",
        
         publish=false,
@@ -16,7 +16,7 @@ import io.cucumber.testng.CucumberOptions;
         			"json:target/report.json",
         			"junit:target/report.xml"
                  },
-        tags = "@tag" )
+        tags = "@tag5" )
 
 public class RunnerClass extends AbstractTestNGCucumberTests {
 	
