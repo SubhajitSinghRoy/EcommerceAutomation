@@ -33,8 +33,10 @@ public class LoginPage extends CommonUtils {
 		this.userName.sendKeys(user);
 		this.password.sendKeys(pass);
 		loginBtn.click();
+		ThreadLocal<HomePage> threadLocalHomePage = new ThreadLocal<>();
+		threadLocalHomePage.set(new HomePage(driver));
 
-		return new HomePage(driver);
+		return threadLocalHomePage.get();
 	}
 
 	public String errorMessage() {

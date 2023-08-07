@@ -1,5 +1,5 @@
 
-@tag5
+@tag
 Feature: Order Page Validation
 	Validate whether user is able to successfully place an order
 	

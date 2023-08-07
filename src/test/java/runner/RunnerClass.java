@@ -16,11 +16,11 @@ import io.cucumber.testng.CucumberOptions;
         			"json:target/report.json",
         			"junit:target/report.xml"
                  },
-        tags = "@tag5" )
+        tags = "@tag" )
 
 public class RunnerClass extends AbstractTestNGCucumberTests {
 	
-
+//
 //	@Override
 //	@DataProvider(parallel = true)
 //public Object[][] scenarios(){

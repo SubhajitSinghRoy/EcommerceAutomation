@@ -6,7 +6,6 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.gherkin.model.Scenario;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -21,16 +20,14 @@ import java.io.IOException;
 
 import org.testng.Assert;
 
-
 public class LoginPageSteps extends Base {
 
 	static ExtentReports extentReports;
 	static ExtentSparkReporter extentSparkReporter;
 	static ExtentTest extentTest;
 
-	
 	@BeforeAll
-	 public static void before_or_after_all() {
+	public static void before_or_after_all() {
 		String path = System.getProperty("user.dir") + "\\target\\extentReports.html";
 		extentSparkReporter = new ExtentSparkReporter(path);
 		extentSparkReporter.config().setDocumentTitle("Document Name");
@@ -45,21 +42,20 @@ public class LoginPageSteps extends Base {
 	public void extentReportUse(io.cucumber.java.Scenario scenario) {
 
 		extentTest = extentReports.createTest(scenario.getName());
-	}  
-	
+	}
+
 	@AfterStep
 	public void extentReportStep(io.cucumber.java.Scenario scenario) throws NoSuchFieldException, SecurityException {
-				
-		if (scenario.isFailed()==false)
-		{
-			
-			extentTest.log( Status.PASS, Scenario.getGherkinName() );
+
+		if (scenario.isFailed() == false) {
+
+			extentTest.log(Status.PASS, Scenario.getGherkinName());
 		}
-		
+
 	}
 
 	@After
-	public void cleanup()  {
+	public void cleanup() {
 		System.out.println("close the browser now");
 		quitApplication();
 		extentReports.flush();
@@ -69,7 +65,7 @@ public class LoginPageSteps extends Base {
 	public void i_navigate_to_the_login_page() throws IOException {
 		driver = initializeDriver();
 		loginPage = launchApp(driver);
-
+		
 	}
 
 	@Then("validate the item {string} is visible in Cart Page")
@@ -93,25 +89,26 @@ public class LoginPageSteps extends Base {
 	public void validate_that_the_error_message_displayed() {
 
 	}
-	
+
 	@When("user navigates to the checkout page")
-	public void user_navigates_to_the_checkout_page() throws InterruptedException{
-		
-		checkOutPage=cartPage.clickCheckoutButton();
+	public void user_navigates_to_the_checkout_page() throws InterruptedException {
+
+		checkOutPage = cartPage.clickCheckoutButton();
 	}
 
 	@When("user places the order with all the details")
 	public void when_user_places_the_order_with_all_the_details() throws InterruptedException {
-		
+
 		checkOutPage.fillCountryName("india");
-		successPage=checkOutPage.orderItems();
-		
+		successPage = checkOutPage.orderItems();
+
 	}
-	
+
 	@Then("user is able to see his order placed in the order page")
 	public void user_is_able_to_see_his_order_placed_in_the_order_page() {
-		
-	Assert.assertTrue(successPage.returnSuccessMessage().equals("THANKYOU FOR THE ORDER."),"success Message do not match"
-			+ "expected is THANKYOU FOR THE ORDER. whereas result is "+successPage.returnSuccessMessage());
+
+		Assert.assertTrue(successPage.returnSuccessMessage().equals("THANKYOU FOR THE ORDER."),
+				"success Message do not match" + "expected is THANKYOU FOR THE ORDER. whereas result is "
+						+ successPage.returnSuccessMessage());
 	}
 }

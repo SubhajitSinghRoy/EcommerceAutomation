@@ -51,7 +51,11 @@ public class CartPage extends CommonUtils {
 	public CheckOutPage clickCheckoutButton() throws InterruptedException {
 
 		javaScriptExecutorClick(this.checkoutBtn);
-		return new CheckOutPage(driver);
+		
+		CheckOutPage checkOutPage= new CheckOutPage(driver);
+		ThreadLocal<CheckOutPage> threadLocalcheckOutPage = new ThreadLocal<>();
+		threadLocalcheckOutPage.set(checkOutPage);
+		return threadLocalcheckOutPage.get();
 
 	}
 
@@ -65,6 +69,8 @@ public class CartPage extends CommonUtils {
 		}
 
 	}
+	
+	 
 
 	public void noProductMsgValidationCorrect() {
 

@@ -32,13 +32,17 @@ public class CommonUtils {
 
     public CartPage clickCartButton() {
         this.cartBtn.click();
-        return new CartPage(driver);
+        ThreadLocal<CartPage> cartPageThreadLocal= new ThreadLocal<>();
+        cartPageThreadLocal.set( new CartPage(driver));
+        return cartPageThreadLocal.get();
     }
 
     public OrderPage clickOrderBtn()
     {
     javaScriptExecutorClick(this.orderBtn);
-        return new OrderPage(driver);
+    ThreadLocal<OrderPage> orderPageThreadLocal = new ThreadLocal<>();
+    orderPageThreadLocal.set(new OrderPage(driver));
+        return orderPageThreadLocal.get();
     }
 
     public static void hardWait(long millis) throws InterruptedException {
@@ -73,7 +77,9 @@ public class CommonUtils {
     public LoginPage logOutBtnClick() throws InterruptedException {
         javaScriptExecutorClick(this.logOutBtn);
         hardWait(3000);
-        return new LoginPage(driver);
+        ThreadLocal<LoginPage> threadLoginpage= new ThreadLocal<>();
+        threadLoginpage.set(new LoginPage(driver));
+        return threadLoginpage.get();
     }
 
 

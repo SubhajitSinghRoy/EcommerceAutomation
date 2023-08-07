@@ -41,6 +41,7 @@ public class Base {
 	public static Properties prop;
 
 	ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<>();
+	ThreadLocal<LoginPage> threadLocalLoginPage = new ThreadLocal<>();
 
 	public WebDriver initializeDriver() throws IOException {
 
@@ -48,10 +49,21 @@ public class Base {
 		prop = new Properties();
 		prop.load(fis);
 
-		String browser = System.getProperty("browser") != null ? System.getProperty("browser")
-				: prop.getProperty("browser");
+//		String browser = System.getProperty("browser") != null ? System.getProperty("browser")
+//				: prop.getProperty("browser");
 
-		if (browser.equalsIgnoreCase("chrome")) {
+		String browser = prop.getProperty("browser");
+
+		if (browser.equalsIgnoreCase("grid")) {
+
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setBrowserName("chrome");
+			caps.setPlatform(Platform.ANY);
+			driver = new RemoteWebDriver(new URL(Constant.GRID_URL), caps);
+			
+		}
+
+		else if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVER_FILE_PATH);
 			driver = new ChromeDriver();
 
@@ -69,39 +81,34 @@ public class Base {
 			driver = new ChromeDriver(options);
 		}
 
-		else if (browser.equalsIgnoreCase("grid")) {
-
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setBrowserName("chrome");
-			caps.setPlatform(Platform.ANY);
-			driver = new RemoteWebDriver(new URL(Constant.GRID_URL), caps);
-			// driver.manage().window().maximize();
-		}
-
-		driver.manage().window().setSize(new Dimension(1440, 900));// fullscreen above maximize
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 		threadLocalDriver.set(driver);
-		// return threadLocalDriver.get();
-		return driver;
+		// driver.manage().window().setSize(new Dimension(1440, 900));// fullscreen
+		// above maximize
+		threadLocalDriver.get().manage().window().maximize();
+		threadLocalDriver.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		threadLocalDriver.get().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+
+		return threadLocalDriver.get();
+		// return driver;
 	}
 
 	public LoginPage launchApp(WebDriver driver) {
 		driver.get(prop.getProperty("url"));
-
-		return new LoginPage(driver);
+		threadLocalLoginPage.set(new LoginPage(driver));
+		return threadLocalLoginPage.get();
 	}
 
-	@BeforeTest(alwaysRun = true) // to avoid giving each of the groups
-	public void goToLoginPage() throws IOException {
+//	@BeforeTest(alwaysRun = true) // to avoid giving each of the groups
+//	public void goToLoginPage() throws IOException {
+//
+//		driver = initializeDriver();
+//		loginPage = launchApp(driver);
+//	}
 
-		driver = initializeDriver();
-		loginPage = launchApp(driver);
-	}
-
-	@AfterTest(alwaysRun = true) // to avoid giving each of the groups
 	public void quitApplication() {
-		driver.quit();
+
+		threadLocalDriver.remove();
+		driver.close();
 	}
 
 	public String getScreenshot(String name, WebDriver driver) throws IOException {
