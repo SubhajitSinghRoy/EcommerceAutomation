@@ -3,13 +3,17 @@ package steps;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import java.net.URL;
 
 import pages.CartPage;
 import pages.CheckOutPage;
@@ -50,17 +54,10 @@ public class Base {
 		if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVER_FILE_PATH);
 			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-			
-			
+
 		} else if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", Constant.GECKODRIVER_FILE_PATH);
 			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 
 		}
 
@@ -70,14 +67,22 @@ public class Base {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
 			driver = new ChromeDriver(options);
-
-			driver.manage().window().setSize(new Dimension(1440, 900));// fullscreen above maximize
-			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 		}
 
+		else if (browser.equalsIgnoreCase("grid")) {
+
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setBrowserName("chrome");
+			caps.setPlatform(Platform.ANY);
+			driver = new RemoteWebDriver(new URL(Constant.GRID_URL), caps);
+			// driver.manage().window().maximize();
+		}
+
+		driver.manage().window().setSize(new Dimension(1440, 900));// fullscreen above maximize
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
 		threadLocalDriver.set(driver);
-		//return threadLocalDriver.get();
+		// return threadLocalDriver.get();
 		return driver;
 	}
 
@@ -104,11 +109,10 @@ public class Base {
 		TakesScreenshot takesScreenshot = ((TakesScreenshot) driver);
 
 		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-		File file = new File(System.getProperty("user.dir")+"\\src\\main\\resources\\snapshots\\"
-				+ name + ".png");
+		File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\snapshots\\" + name + ".png");
 		FileUtils.copyFile(source, file);
 
-		return System.getProperty("user.dir")+"\\src\\main\\resources\\snapshots\\" + name + ".png";
+		return System.getProperty("user.dir") + "\\src\\main\\resources\\snapshots\\" + name + ".png";
 
 	}
 
